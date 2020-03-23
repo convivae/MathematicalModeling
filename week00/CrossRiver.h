@@ -1,9 +1,13 @@
-//
-// Created by convi on 2020/3/23.
-//
-
 #ifndef MATHEMATICALMODELING_CROSSRIVER_H
 #define MATHEMATICALMODELING_CROSSRIVER_H
+
+/**
+ * Created by convi on 2020/3/23.
+ *
+ * 在河的一侧，有N个商人和N个随从需要过河，河中有一条小船，一次最多只能载重M人。
+ * 随从们密约，在河的任一岸，一旦随从的人数多于商人的人数，就杀人越货，乘船渡河的方案由商人决定。
+ * 问：商人们有安全过河的方案吗？如果有，怎样才能安全过河？
+ */
 
 #include <iostream>
 #include <cstdio>
