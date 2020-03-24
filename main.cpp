@@ -13,7 +13,7 @@ int main() {
      * week01 SheepDistribution
      */
     std::ofstream out("../output.txt", std::ios_base::out);
-    auto test_week01 = SheepDistribution(1, 3);
+    auto test_week01 = SheepDistribution(1, 4);
     test_week01.calculate(std::cout);
     //test_week01.calculate(out);
 

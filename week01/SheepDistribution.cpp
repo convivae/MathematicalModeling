@@ -25,13 +25,13 @@ void SheepDistribution::dfs(Fraction remain_num, Fraction left, Fraction equal) 
     Fraction right_bound = remain_num / equal;
     int start = left.ceil();
     int end = right_bound.floor();
-    if (remain_num == _neighbor_sheep_num + 1 && right_bound.has_value()) {
+    if (remain_num == _neighbor_sheep_num + Fraction(1) && right_bound.has_value()) {
         end = right_bound.value();
     }
 
     for (auto i = start; i <= end; i++) {
         _sons[(_son_num + _neighbor_sheep_num - remain_num).value()] = i;
-        dfs(remain_num - Fraction(1), i, equal - Fraction(1) / i);
+        dfs(remain_num - Fraction(1), Fraction(i), equal - Fraction(1) / Fraction(i));
     }
 }
 
