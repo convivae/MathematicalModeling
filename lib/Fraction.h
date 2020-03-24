@@ -38,11 +38,60 @@ public:
 
     Fraction operator/(const Fraction &f);
 
-    void operator=(const Fraction &f);
+    Fraction &operator=(const Fraction &f);
 
-    void operator=(const int &i);
+    Fraction operator+=(const Fraction &f);
+
+    Fraction operator-=(const Fraction &f);
+
+    Fraction operator*=(const Fraction &f);
+
+    Fraction operator/=(const Fraction &f);
 
     bool operator==(const Fraction &f);
+
+    bool operator!=(const Fraction &f);
+
+    bool operator>(const Fraction &f);
+
+    bool operator<(const Fraction &f);
+
+    bool operator>=(const Fraction &f);
+
+    bool operator<=(const Fraction &f);
+
+
+    Fraction operator+(const int &i);
+
+    Fraction operator-(const int &i);
+
+    Fraction operator*(const int &i);
+
+    Fraction operator/(const int &i);
+
+    Fraction operator+=(const int &i);
+
+    Fraction operator-=(const int &i);
+
+    Fraction operator*=(const int &i);
+
+    Fraction operator/=(const int &i);
+
+    Fraction &operator=(const int &i);
+
+    bool operator==(const int &i);
+
+    bool operator!=(const int &i);
+
+    bool operator>(const int &i);
+
+    bool operator<(const int &i);
+
+    bool operator>=(const int &i);
+
+    bool operator<=(const int &i);
+
+
 };
 
 

@@ -10,8 +10,14 @@ Fraction::Fraction(int _up, int _down) {
         std::cerr << "Error! Can not be zero or negative" << std::endl;
         exit(-1);
     }
-    this->up = _up;
-    this->down = _down;
+    if (_up == 0) {
+        this->up = _up;
+        this->down = 1;
+    } else {
+        int d = gcd(abs(_up), abs(_down));
+        this->up = _up / d;
+        this->down = _down / d;
+    }
 }
 
 Fraction::Fraction(int _up) {
@@ -24,48 +30,6 @@ Fraction::Fraction(int _up) {
 }
 
 Fraction::Fraction() : up(0), down(1) {}
-
-Fraction Fraction::operator+(const Fraction &f) {
-    Fraction res;
-    res.up = this->up * f.down + f.up * this->down;
-    res.down = this->down * f.down;
-    return reduction(res);
-}
-
-Fraction Fraction::operator-(const Fraction &f) {
-    Fraction res{};
-    res.up = this->up * f.down - this->down * f.up;
-    res.down = this->down * f.down;
-    return reduction(res);
-}
-
-Fraction Fraction::operator*(const Fraction &f) {
-    Fraction res{};
-    res.up = this->up * f.up;
-    res.down = this->down * f.down;
-    return reduction(res);
-}
-
-Fraction Fraction::operator/(const Fraction &f) {
-    Fraction res{};
-    res.up = this->up * f.down;
-    res.down = this->down * f.up;
-    return reduction(res);
-}
-
-void Fraction::operator=(const Fraction &f) {
-    this->up = f.up;
-    this->down = f.down;
-}
-
-void Fraction::operator=(const int &i) {
-    this->up = i;
-    this->down = 1;
-}
-
-bool Fraction::operator==(const Fraction &f) {
-    return this->up == f.up && this->down == f.down;
-}
 
 Fraction Fraction::reduction(Fraction result) {
     if (result.down < 0) {
@@ -134,3 +98,152 @@ bool Fraction::has_value() {
     f = reduction(f);
     return f.down == 1;
 }
+
+Fraction Fraction::operator+(const Fraction &f) {
+    Fraction res;
+    res.up = this->up * f.down + f.up * this->down;
+    res.down = this->down * f.down;
+    return reduction(res);
+}
+
+Fraction Fraction::operator-(const Fraction &f) {
+    Fraction res{};
+    res.up = this->up * f.down - this->down * f.up;
+    res.down = this->down * f.down;
+    return reduction(res);
+}
+
+Fraction Fraction::operator*(const Fraction &f) {
+    Fraction res{};
+    res.up = this->up * f.up;
+    res.down = this->down * f.down;
+    return reduction(res);
+}
+
+Fraction Fraction::operator/(const Fraction &f) {
+    Fraction res{};
+    res.up = this->up * f.down;
+    res.down = this->down * f.up;
+    return reduction(res);
+}
+
+Fraction &Fraction::operator=(const Fraction &f) {
+    if (this != &f) {
+        this->up = f.up;
+        this->down = f.down;
+    }
+    return *this;
+}
+
+Fraction Fraction::operator+=(const Fraction &f) {
+    *this = *this + f;
+    return *this;
+}
+
+Fraction Fraction::operator-=(const Fraction &f) {
+    *this = *this - f;
+    return *this;
+}
+
+Fraction Fraction::operator*=(const Fraction &f) {
+    *this = *this * f;
+    return *this;
+}
+
+Fraction Fraction::operator/=(const Fraction &f) {
+    *this = *this / f;
+    return *this;
+}
+
+bool Fraction::operator==(const Fraction &f) {
+    Fraction res = reduction(f);
+    return this->up == res.up && this->down == res.down;
+}
+
+bool Fraction::operator!=(const Fraction &f) {
+    return !(*this == f);
+}
+
+Fraction Fraction::operator+(const int &i) {
+    return (*this + Fraction(i));
+}
+
+Fraction Fraction::operator-(const int &i) {
+    return (*this - Fraction(i));
+}
+
+Fraction Fraction::operator*(const int &i) {
+    return (*this * Fraction(i));
+}
+
+Fraction Fraction::operator/(const int &i) {
+    return (*this / Fraction(i));
+}
+
+Fraction Fraction::operator+=(const int &i) {
+    *this = *this + i;
+    return *this;
+}
+
+Fraction Fraction::operator-=(const int &i) {
+    *this = *this - i;
+    return *this;
+}
+
+Fraction Fraction::operator*=(const int &i) {
+    *this = *this * i;
+    return *this;
+}
+
+Fraction Fraction::operator/=(const int &i) {
+    *this = *this / i;
+    return *this;
+}
+
+Fraction &Fraction::operator=(const int &i) {
+    this->up = i;
+    this->down = 1;
+    return *this;
+}
+
+bool Fraction::operator==(const int &i) {
+    return (*this == Fraction(i));
+}
+
+bool Fraction::operator!=(const int &i) {
+    return !(*this == i);
+}
+
+bool Fraction::operator>(const Fraction &f) {
+    return (*this - f).up > 0;
+}
+
+bool Fraction::operator<(const Fraction &f) {
+    return (*this - f).up < 0;
+}
+
+bool Fraction::operator>=(const Fraction &f) {
+    return !(*this < f);
+}
+
+bool Fraction::operator<=(const Fraction &f) {
+    return !(*this > f);
+}
+
+bool Fraction::operator>(const int &i) {
+    return (*this > Fraction(i));
+}
+
+bool Fraction::operator<(const int &i) {
+    return (*this < Fraction(i));
+}
+
+bool Fraction::operator>=(const int &i) {
+    return !(*this < i);
+}
+
+bool Fraction::operator<=(const int &i) {
+    return !(*this > i);
+}
+
+
